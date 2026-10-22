@@ -1,5 +1,3 @@
-
-import os
 import cv2
 import rclpy
 
@@ -10,7 +8,6 @@ from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 from std_msgs.msg import Int32, String
 from rclpy.executors import ExternalShutdownException
-from ament_index_python.packages import get_package_share_directory
 
 
 class ObjectDetection(Node):
@@ -157,7 +154,7 @@ class ObjectDetection(Node):
             # Rotated bounding box
             rect = cv2.minAreaRect(cnt)
             box = cv2.boxPoints(rect)
-            box = np.int0(box)
+            box = box.astype(int)
             cv2.drawContours(annotated_img, [box], 0, (0, 255, 0), 2)
 
             # Center marker
